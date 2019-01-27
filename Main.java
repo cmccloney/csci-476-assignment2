@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 public class Main {
 
 	public static void main(String args[]) {
-		String filename = "C:\\Users\\cmccl_000\\Desktop\\Classes\\Spring 2019\\CSCI 476\\assignment2\\src\\memorydump.dmp";
+		String filename = "memorydump.dmp";
 		String line = null;
 		String lines[] = new String[2];
 		int i = 0;
