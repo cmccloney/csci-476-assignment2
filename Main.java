@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 public class Main {
 
 	public static void main(String args[]) {
-		String filename = "memorydump.dmp";
+		String filename = "C:\\Users\\cmccl_000\\Desktop\\Classes\\Spring 2019\\CSCI 476\\assignment2\\src\\memorydump.dmp";
 		String line = null;
 		String lines[] = new String[2];
 		int i = 0;
@@ -60,30 +60,33 @@ public class Main {
 			name2 = (m2.group(0)); // ^Paxton/John^
 		}
 		
-		Pattern p2 = Pattern.compile("\\^[0-9a-zA-Z\\/\\^]+\\?\\;[0-9]*=[0-9][0-9][0-9][0-9]"); //used for finding expiration date, I think?
-		Matcher a = p2.matcher(lines[1]);
+		Pattern p2 = Pattern.compile("\\^[a-zA-Z\\/]+\\^[0-9][0-9][0-9][0-9][0-9][0-9][0-9]"); //used for finding expiration date
+		Matcher a = p2.matcher(lines[0]);													//and cvc number, I think
+		Matcher b = p2.matcher(lines[1]);
 		String[] expDate = new String[2];
 		int i = 0;
 		while(a.find()) {
 			expDate[i] = (a.group(0));
 			i++;
 		}
-		
-		//more code
+		while(b.find()) {
+			expDate[i] = (b.group(0));
+			i++;
+		}
 		
 		System.out.println("There are 2 useable track I records in the memory data");
 		System.out.println("<Information of the 1st record>");
 		System.out.println("Cardholder's Name: " + name1.replace("^", ""));
-		System.out.println("Card Number:");
-		System.out.println("Expiration Date: " + expDate[0].substring(expDate[0].length()-2) + "/20" + expDate[0].substring(expDate[0].length()-4,expDate[0].length()-2));
-		System.out.println("CVC Number:");
+		System.out.println("Card Number: " + trackIdata[0].substring(2, 18));
+		System.out.println("Expiration Date: " + expDate[0].substring(expDate[0].length()-5,expDate[0].length()-3) + "/20" + expDate[0].substring(expDate[0].length()-7,expDate[0].length()-5));
+		System.out.println("CVC Number: " + expDate[0].substring(expDate[0].length()-3));
 		System.out.println();
 		
 		System.out.println("<Information of the 2nd record>");
 		System.out.println("Cardholder's Name: " + name2.replace("^", ""));
-		System.out.println("Card Number:");
-		System.out.println("Expiration Date: " + expDate[1].substring(expDate[1].length()-2) + "/20" + expDate[1].substring(expDate[1].length()-4,expDate[1].length()-2));
-		System.out.println("CVC Number:");
+		System.out.println("Card Number: " + trackIdata[3].substring(2, 18));
+		System.out.println("Expiration Date: " + expDate[1].substring(expDate[1].length()-5,expDate[1].length()-3) + "/20" + expDate[1].substring(expDate[1].length()-7,expDate[1].length()-5));
+		System.out.println("CVC Number: " + expDate[1].substring(expDate[1].length()-3));
 		
 	}
 	
